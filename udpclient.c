@@ -21,33 +21,33 @@ char send_data[1024];
 
 //check that correct number of arguments are given
    
-if(argc != 3){
-    
+if(argc != 3)
+   { 
     fprintf(stderr,"Incorrect number of arguments\nUsage: udpclient [host ip] [client port]\n");
     exit(1);
-   
-}
+   }
 
 //host = (struct hostent *) gethostbyname((char *)"127.0.0.1");
 
 // Get Host input and check if it is valid
 host = gethostbyname(argv[1]);
-if(host == NULL){
+if(host == NULL)
+   {
     perror("Invalid Host IP");
     exit(1);
-}
+   }
 
 //Get Port and check if it is valid
 clientPort = atoi(argv[2]);
 if(clientPort > 65535)
-{
+   {
     perror("Client port exceeds 16-bit range\n")     
     exit(1);
-}
+   }
 
 //socket(int domain, int type, int protocol)   
-if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) == -1) {
-      
+if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) == -1) 
+{
     perror("socket");
     exit(1);
 }
@@ -66,20 +66,14 @@ while (1)
     fgets(send_data, sizeof(send_data), stdin); //Gets data from user input and stores it in send_data
        
     if ((strcmp(send_data , "q") == 0) || strcmp(send_data , "Q") == 0)//Checks that quit command has not been inputted
-       	          break;
+       	break;
 
     else{
           
         printf("QUITTING ON USER REQUEST\n");
-          
-        sendto(sock, send_data, strlen(send_data), 0,
-              
+        sendto(sock, send_data, strlen(send_data), 0,     
             (struct sockaddr *)&server_addr, sizeof(struct sockaddr));   
     }
 }
      
-   
-
-}
-   
 }
