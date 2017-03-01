@@ -32,7 +32,7 @@ if(argc != 3){
 
 // Get Host input and check if it is valid
 host = gethostbyname(argv[1]);
-if(hostInput == NULL){
+if(host == NULL){
     perror("Invalid Host IP");
     exit(1);
 }
