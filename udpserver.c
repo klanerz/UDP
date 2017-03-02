@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
 
         addr_len = sizeof(struct sockaddr);
 		
-	printf("UDPServer Waiting for client on port X\n");
+	printf("UDPServer Waiting for client on port %d\n",serverPort);
         fflush(stdout);
 
 	while (1)
