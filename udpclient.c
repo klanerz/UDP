@@ -49,10 +49,10 @@ int main(int argc, char *argv[]) {
       printf("Client port exceeds 16-bit range\nTry again\n");
       return 0;
    }
-      else if(!isdigit(clientPort)){
-      printf("Invalid port input\nTry again\n");
-      return 0;
-   }
+  //    else if(!isdigit(clientPort)){
+  //    printf("Invalid port input\nTry again\n");
+  //    return 0;
+  // }
 
    host = (struct hostent *) gethostbyname((char *)hostInput);
    if(host == NULL){
