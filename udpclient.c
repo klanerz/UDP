@@ -3,25 +3,16 @@
  */
 
 #include <sys/types.h>
-
 #include <sys/socket.h>
-
 #include <netinet/in.h>
-
 #include <arpa/inet.h>
-
 #include <netdb.h>
-
 #include <stdio.h>
-
 #include <unistd.h>
-
 #include <errno.h>
-
 #include <string.h>
-
 #include <stdlib.h>
-
+#include <ctype.h>
 
 
 int main(int argc, char *argv[]) {
@@ -47,37 +38,27 @@ int main(int argc, char *argv[]) {
    }
 
    hostInput = argv[1];
-
    clientPort = atoi(argv[2]);
-
    ipVal = inet_pton(AF_INET, hostInput,& ip);//host ip validation
 
    if(ipVal != 1){
-
        printf("%s is an invalid IPv4 address.\nTry again.\n",hostInput);
-
        return 0;
-
    }
-
-   if(clientPort > 65535)
-
-   {
-
+   if(clientPort > 65535){
       printf("Client port exceeds 16-bit range\nTry again\n");
-
       return 0;
-
+   }
+      else if(!isdigit(clientPort)){
+      printf("Invalid port input\nTry again\n");
+      return 0;
    }
 
    host = (struct hostent *) gethostbyname((char *)hostInput);
-
    if(host == NULL){
 
        printf("Host %s does not exist\n", hostInput);
-
        return 0;
-
    }
 
 //socket(int domain, int type, int protocol)
@@ -85,9 +66,7 @@ int main(int argc, char *argv[]) {
    if ((sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1) {
 
       perror("socket");
-
       exit(1);
-
    }
 
    server_addr.sin_family = AF_INET;
@@ -113,11 +92,9 @@ while(1){
           close(sock);
           return 0;
         }
-        else
-        {
+        else{
           sendto(sock, send_data, strlen(send_data), 0,
           (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
-
         }
     }
 }
