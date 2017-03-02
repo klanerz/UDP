@@ -16,25 +16,35 @@
 int main(int argc, char *argv[]) {
    int sock;
    int inPort;
-   int hostInput;
+   char *hostInput;
    int clientPort;
    struct sockaddr_in server_addr;
    struct hostent *host;
    char send_data[1024];
    char commandInput[20];
+   int ipVal = 0;
+   unsigned long ip;
 
 //check that correct number of arguments are given
    if(argc != 3){
-    printf("Incorrect number of arguments\nUsage: udpclient [host] [client]\n");
+    fprintf(stderr,"Incorrect number of arguments\nUsage: %s [host] [client]\n", 
+argv[0]);
     return -1;
    }
-
+   
    hostInput = argv[1];
    clientPort = atoi(argv[2]);
 
+   ipVal = inet_pton(AF_INET, hostInput,& ip);//host ip validation
+
+   if(ipVal != 1){
+       printf("%s is an invalid IPv4 address.\nTry again.\n",hostInput);
+       return 0;
+   }
+
    if(clientPort > 65535)
    {
-      printf("Client port exceeds 16-bit range\n")
+      printf("Client port exceeds 16-bit range\nTry again\n");
       return 0;
    }
 
@@ -68,7 +78,7 @@ int main(int argc, char *argv[]) {
       fgets(send_data, sizeof(send_data), stdin); //Gets data from user input and stores it in send_data
 
        if ((strcmp(send_data , "q") == 0) || strcmp(send_data , "Q") == 0)//Checks that quit command has not been inputted
-       	  break;
+          break;
 
        else{
           printf("QUITTING ON USER REQUEST\n");
