@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
             fprintf(stderr,"Invalid input\nUsage: ./a.out udpserver [Listen Port]");
             exit(1);
         }
-        
+        serverPort = atoi(argv[1]);
         if(serverPort > 65535 )
         {
             perror("Server port exceeds 16-bit range\n");
