@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
        printf("%s is an invalid IPv4 address.\nTry again.\n",hostInput);
        return 0;
    }
-   if(clientPort > 65535){
+   if((clientPort > 65535) || (clientPort < 0) ){
       printf("Client port exceeds 16-bit range\nTry again\n");
       return 0;
    }
