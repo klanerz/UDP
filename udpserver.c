@@ -62,10 +62,20 @@ int main(int argc, char *argv[])
 	  
 
 	  recv_data[bytes_read] = '\0';
-
-          printf("(%s , %d) said : ",inet_ntoa(client_addr.sin_addr),
-                                       ntohs(client_addr.sin_port));
-          printf("%s", recv_data);
+		
+          printf("(%s , %d) said : %s",inet_ntoa(client_addr.sin_addr),
+                                       ntohs(client_addr.sin_port), &recv_data);
+          if( isdigit(&recv_data)
+          {                             
+          printf("Number Received: %s", &recv_data)
+          int y = atoi(&recv_data*&recv_data);
+          printf("The square of %s is %d",&recv_data,y);
+          }
+          else if(&recv_data == "EXITING ON CLIENT REQUEST")
+          {
+              printf("Exiting on client request");
+              return 0;
+          }
 	  fflush(stdout);
 
         }
