@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
                                        ntohs(client_addr.sin_port), &recv_data);
           if( isdigit(&recv_data)
           {                             
-          printf("Number Received: %s", &recv_data)
+          printf("Number Received: %s", &recv_data);
           int y = atoi(&recv_data*&recv_data);
           printf("The square of %s is %d",&recv_data,y);
           }
